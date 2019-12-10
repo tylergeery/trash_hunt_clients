@@ -13,14 +13,17 @@ class SetUp {
     }
 
     startGame(action, data) {
+        console.log('STARTING GAME');
         this.setupScreen.clear();
         this.gameScreen.setup(data);
         this.gameScreen.on(this.endGame.bind(this));
     }
 
-    endGame() {
+    endGame(action, data) {
+        console.log('ENDING GAME');
         this.connection && this.connection.close();
         this.connection = null;
+        this.gameScreen.clear();
         this.setup();
     }
 }

@@ -1,7 +1,7 @@
 class Screen {
     /**
-     * @param {DomElement} container
-     */
+    * @param {DomElement} container
+    */
     constructor(container) {
         this.container = container;
         this.subscribers = [];
@@ -17,6 +17,7 @@ class Screen {
     }
 
     emit(action, data) {
+        console.log('EMIT: ', action, data);
         for (let i = 0; i < this.subscribers.length; i++) {
             this.subscribers[i](action, data);
         }

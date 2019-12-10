@@ -1,3 +1,5 @@
+const gameBoardSize = 15;
+
 class GameScreen extends Screen {
     render() {
         var ctx = this.container.getContext('2d');
@@ -35,8 +37,8 @@ class GameScreen extends Screen {
     _drawMaze(ctx, maze) {
         var width = this.container.width,
             height = this.container.height,
-            ws = width / 10,
-            hs = height / 10;
+            ws = width / gameBoardSize,
+            hs = height / gameBoardSize;
 
         // TODO: Tough one
         // loop through 3d array maze
@@ -86,14 +88,14 @@ class GameScreen extends Screen {
     _drawPlayer(ctx, pos, color) {
         var width = this.container.width,
             height = this.container.height,
-            ws = width / 10,
-            hs = height / 10;
+            ws = width / gameBoardSize,
+            hs = height / gameBoardSize;
 
         ctx.fillStyle = color;
         ctx.fillRect(
             ws * pos.x + 1,
             hs * pos.y + 1,
-            10, 10
+            gameBoardSize, gameBoardSize
         );
         ctx.fill();
     }
@@ -101,39 +103,57 @@ class GameScreen extends Screen {
     _drawTrash(ctx, pos) {
         var width = this.container.width,
             height = this.container.height,
-            ws = width / 10,
-            hs = height / 10;
+            ws = width / gameBoardSize,
+            hs = height / gameBoardSize;
 
         ctx.fillStyle = '#555';
         ctx.fillRect(
             ws * pos.x + 1,
             hs * pos.y + 1,
-            10, 10
+            gameBoardSize, gameBoardSize
         );
         ctx.fill();
     }
 
+    _getMove(code) {
+        switch (code) {
+            case 'ArrowLeft':
+            case 'KeyA':
+                return 'l';
+                break;
+            case 'ArrowUp':
+            case 'KeyW':
+                return 'u';
+                break;
+            case 'ArrowRight':
+            case 'KeyD':
+                return 'r';
+                break;
+            case 'ArrowDown':
+            case 'KeyS':
+                return 'd';
+                break;
+        }
+
+        return '0';
+    }
+
     setListeners() {
+        let nextMove = '0'
+
         document.addEventListener('keyup', (e) => {
-            switch (e.code) {
-                case 'ArrowLeft':
-                case 'KeyA':
-                    this.connection.send('l');
-                    break;
-                case 'ArrowUp':
-                case 'KeyW':
-                    this.connection.send('u');
-                    break;
-                case 'ArrowRight':
-                case 'KeyD':
-                    this.connection.send('r');
-                    break;
-                case 'ArrowDown':
-                case 'KeyS':
-                    this.connection.send('d');
-                    break;
-            }
+            nextMove = this._getMove(e.code);
         });
+        document.addEventListener('keydown', (e) => {
+            nextMove = this._getMove(e.code);
+        });
+
+        let move = () => {
+            this.connection.send(nextMove);
+            nextMove = '0';
+            setTimeout(move, 250);
+        }
+        setTimeout(move, 250);
     }
 
     handleMessage(message) {
@@ -153,6 +173,11 @@ class GameScreen extends Screen {
             case 3: // Updated game state
                 this.state.players = JSON.parse(msg.data);
                 this.render();
+            break;
+            case 4: // Game Over!
+                if (window.confirm('Game over!!')) {
+                    this.emit('gameEnd');
+                }
             break;
             default:
                 console.log('Unknown message:', msg);
