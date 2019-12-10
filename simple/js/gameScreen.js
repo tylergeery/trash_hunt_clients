@@ -31,7 +31,6 @@ class GameScreen extends Screen {
         }
 
         this._drawTrash(ctx, maze.trashPos);
-        this.setListeners();
     }
 
     _drawMaze(ctx, maze) {
@@ -144,16 +143,19 @@ class GameScreen extends Screen {
         document.addEventListener('keyup', (e) => {
             nextMove = this._getMove(e.code);
         });
-        document.addEventListener('keydown', (e) => {
-            nextMove = this._getMove(e.code);
-        });
 
         let move = () => {
-            this.connection.send(nextMove);
-            nextMove = '0';
-            setTimeout(move, 250);
+            if (this.gameOver) {
+                return
+            }
+
+            let tmp = nextMove
+            nextMove = '0'
+
+            this.connection.send(tmp);
+            setTimeout(move, 500);
         }
-        setTimeout(move, 250);
+        setTimeout(move, 500);
     }
 
     handleMessage(message) {
@@ -169,12 +171,14 @@ class GameScreen extends Screen {
             case 2: // Init game
                 this.state = JSON.parse(msg.data);
                 this.render();
+                this.setListeners();
             break;
             case 3: // Updated game state
                 this.state.players = JSON.parse(msg.data);
                 this.render();
             break;
             case 4: // Game Over!
+                this.gameOver = true;
                 if (window.confirm('Game over!!')) {
                     this.emit('gameEnd');
                 }
