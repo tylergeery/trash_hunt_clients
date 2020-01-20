@@ -7,9 +7,8 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="Button" type="Button" parent="."]
-margin_left = 28.0
 margin_right = 40.0
-margin_bottom = 43.0
-size_flags_horizontal = 8
+margin_bottom = 20.0
+size_flags_horizontal = 5
 theme = ExtResource( 1 )
 
