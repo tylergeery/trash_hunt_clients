@@ -27,10 +27,15 @@ func validate():
 
 	if not is_valid_password():
 		print("TODO: invalid pass")
-		return true
+		return false
+
+	return true
 
 func submit():
-	pass
+	print("submitting login: ", email, " ", password)
+	var login_request = get_node("VBoxContainer/LoginRequest")
+	login_request.register(email, password, self, "handle_login_response")
+	login_request.send()
 
 func handle_login_response(response):
 	print("response: ", response)

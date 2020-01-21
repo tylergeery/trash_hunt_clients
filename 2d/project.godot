@@ -9,15 +9,15 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "THLogin",
-"class": "THLogin",
-"language": "GDScript",
-"path": "res://scripts/http/THLogin.gd"
-}, {
-"base": "THBase",
+"base": "HTTPRequest",
 "class": "THBase",
 "language": "GDScript",
 "path": "res://scripts/http/THBase.gd"
+}, {
+"base": "THBase",
+"class": "THLogin",
+"language": "GDScript",
+"path": "res://scripts/http/THLogin.gd"
 } ]
 _global_script_class_icons={
 "THBase": "",

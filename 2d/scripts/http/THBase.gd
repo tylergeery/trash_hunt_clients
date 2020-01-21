@@ -2,10 +2,13 @@ extends HTTPRequest
 
 class_name THBase
 
+var obj = null
+var method_name = null
 
-func _init(obj, method_name):
-	self.obj = obj
-	self.method_name = method_name
+func _register(new_obj, new_method_name):
+	print("registering: ", obj, "->", method_name)
+	obj = new_obj
+	method_name = new_method_name
 	self.connect("request_completed", self, "done")
 
 func getEndpoint():
@@ -15,7 +18,7 @@ func getURL():
 	return self.getBaseURL() + self.getEndpoint()
 
 func getBaseURL():
-	return "localhost:8000"
+	return "http://127.0.0.1:3000"
 
 func getHeaders():
 	return [
@@ -32,7 +35,8 @@ func getRequestType():
 	return HTTPClient.METHOD_GET
 
 func send():
-	return $HTTPRequest.request(
+	print("HTTP Request sending: ", self.getRequestType() , " : ", self.getURL(), " : ", self.getRequestBody())
+	return self.request(
 		self.getURL(),
 		self.getHeaders(),
 		self.useSSL(),
@@ -42,6 +46,6 @@ func send():
 
 func done(result, response_code, headers, body):
 	var json = JSON.parse(body.get_string_from_utf8())
-	print("HTTP Result: ", json.result)
-	self.obj.call(self.method_name, [response_code, json.result])
+	print("HTTP Result: ", body.get_string_from_utf8())
+	obj.call(method_name, [response_code, json.result])
 

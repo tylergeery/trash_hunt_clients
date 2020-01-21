@@ -2,15 +2,21 @@ extends THBase
 
 class_name THLogin
 
-func _init(email, pw, obj, method_name).(obj, method_name):
-	self.email = email
-	self.pw = pw
+var email = ""
+var pw = ""
+
+func register(_email, _pw, obj, method_name):
+	._register(obj, method_name)
+	email = _email
+	pw = _pw
 
 func getEndpoint():
-	return "/login"
+	return "/login/"
 
 func getRequestBody():
-	return JSON.print({"email": self.email, "pw": self.pw})
+	print("JSON body: ", JSON.print({"email": email, "pw": pw}))
+	return JSON.print({"email": email, "pw": pw})
 
 func getRequestType():
+	print("POST REQUEST")
 	return HTTPClient.METHOD_POST
