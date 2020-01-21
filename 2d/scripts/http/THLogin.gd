@@ -1,6 +1,6 @@
 extends THBase
 
-class_name THBase
+class_name THLogin
 
 func _init(email, pw, obj, method_name).(obj, method_name):
 	self.email = email

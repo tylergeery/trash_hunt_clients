@@ -44,4 +44,4 @@ func done(result, response_code, headers, body):
 	var json = JSON.parse(body.get_string_from_utf8())
 	print("HTTP Result: ", json.result)
 	self.obj.call(self.method_name, [response_code, json.result])
-	
+
