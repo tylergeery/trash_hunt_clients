@@ -10,7 +10,7 @@ func getEndpoint():
 	return "/login"
 
 func getRequestBody():
-	return JSON.print({"email": seld.email, "pw": self.pw})
+	return JSON.print({"email": self.email, "pw": self.pw})
 
 func getRequestType():
 	return HTTPClient.METHOD_POST
