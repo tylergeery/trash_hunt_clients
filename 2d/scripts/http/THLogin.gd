@@ -18,5 +18,4 @@ func getRequestBody():
 	return JSON.print({"email": email, "pw": pw})
 
 func getRequestType():
-	print("POST REQUEST")
 	return HTTPClient.METHOD_POST

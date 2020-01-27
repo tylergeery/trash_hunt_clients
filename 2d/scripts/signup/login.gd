@@ -6,13 +6,13 @@ var password = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	get_node("VBoxContainer/VBoxContainer/Button").connect("button_up", self, "validate_and_submit")
+	get_node("LoginContainer/LoginButtonHolder/Button").connect("button_up", self, "validate_and_submit")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _unhandled_input(event):
 	if event is InputEventKey:
-		email = get_node("VBoxContainer/EmailInput/LineEdit").get_text()
-		password = get_node("VBoxContainer/PasswordInput/LineEdit").get_text()
+		email = get_node("LoginContainer/EmailInput/LineEdit").get_text()
+		password = get_node("LoginContainer/PasswordInput/LineEdit").get_text()
 
 func is_valid_email():
 	return len(email) > 3
@@ -33,7 +33,7 @@ func validate():
 
 func submit():
 	print("submitting login: ", email, " ", password)
-	var login_request = get_node("VBoxContainer/LoginRequest")
+	var login_request = get_node("LoginContainer/LoginRequest")
 	login_request.register(email, password, self, "handle_login_response")
 	login_request.send()
 

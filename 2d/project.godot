@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "THLogin",
 "language": "GDScript",
 "path": "res://scripts/http/THLogin.gd"
+}, {
+"base": "THBase",
+"class": "THRegistration",
+"language": "GDScript",
+"path": "res://scripts/http/THRegistration.gd"
 } ]
 _global_script_class_icons={
 "THBase": "",
-"THLogin": ""
+"THLogin": "",
+"THRegistration": ""
 }
 
 [application]
