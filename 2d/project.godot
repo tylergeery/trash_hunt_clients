@@ -33,7 +33,8 @@ _global_script_class_icons={
 [application]
 
 config/name="Trash Hunt 2D"
-run/main_scene="res://screens/login/LoginScreen.tscn"
+run/main_scene="res://screens/sign_in/SplashPage.tscn"
+boot_splash/bg_color=Color( 0.521569, 1, 0.529412, 1 )
 config/icon="res://icon.png"
 
 [display]

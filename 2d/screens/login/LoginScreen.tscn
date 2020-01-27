@@ -1,41 +1,40 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/signup/login.gd" type="Script" id=1]
-[ext_resource path="res://screens/sign_in/SettingsContainer.tscn" type="PackedScene" id=2]
-[ext_resource path="res://screens/sign_in/EmailInput.tscn" type="PackedScene" id=3]
-[ext_resource path="res://screens/sign_in/PasswordInput.tscn" type="PackedScene" id=4]
-[ext_resource path="res://screens/sign_in/LogInButton.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scripts/http/THLogin.gd" type="Script" id=6]
+[ext_resource path="res://screens/sign_in/SplashImage.tscn" type="PackedScene" id=2]
+[ext_resource path="res://screens/sign_in/SettingsContainer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://screens/sign_in/EmailInput.tscn" type="PackedScene" id=4]
+[ext_resource path="res://screens/sign_in/PasswordInput.tscn" type="PackedScene" id=5]
+[ext_resource path="res://screens/sign_in/LogInButton.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scripts/http/THLogin.gd" type="Script" id=7]
 
 [node name="LoginScreen" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 
-[node name="TextureRect" type="TextureRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="SplashImage" parent="." instance=ExtResource( 2 )]
 
-[node name="LoginContainer" parent="." instance=ExtResource( 2 )]
+[node name="LoginContainer" parent="." instance=ExtResource( 3 )]
 
-[node name="EmailInput" parent="LoginContainer" instance=ExtResource( 3 )]
+[node name="EmailInput" parent="LoginContainer" instance=ExtResource( 4 )]
 margin_right = 380.0
 margin_bottom = 149.0
 rect_min_size = Vector2( 0, 0 )
 size_flags_horizontal = 1
 
-[node name="PasswordInput" parent="LoginContainer" instance=ExtResource( 4 )]
+[node name="PasswordInput" parent="LoginContainer" instance=ExtResource( 5 )]
 margin_top = 153.0
 margin_right = 380.0
 margin_bottom = 302.0
 rect_min_size = Vector2( 0, 0 )
 size_flags_horizontal = 1
 
-[node name="LoginButtonHolder" parent="LoginContainer" instance=ExtResource( 5 )]
+[node name="LoginButtonHolder" parent="LoginContainer" instance=ExtResource( 6 )]
 margin_top = 306.0
 margin_right = 380.0
 margin_bottom = 349.0
 
 [node name="LoginRequest" type="HTTPRequest" parent="LoginContainer"]
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 
