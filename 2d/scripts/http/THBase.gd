@@ -47,5 +47,5 @@ func send():
 func done(result, response_code, headers, body):
 	var json = JSON.parse(body.get_string_from_utf8())
 	print("HTTP Result: ", body.get_string_from_utf8())
-	obj.call(method_name, [response_code, json.result])
+	obj.call(method_name, response_code, json.result)
 

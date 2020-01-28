@@ -1,4 +1,4 @@
-extends Control
+extends FormScreen
 
 # Declare member variables here. Examples:
 var email = ""
@@ -16,39 +16,29 @@ func _unhandled_input(event):
 		password = get_node("RegistrationContainer/PasswordInput/LineEdit").get_text()
 		username = get_node("RegistrationContainer/UsernameInput/LineEdit").get_text()
 
-func is_valid_length(val, n):
-	return len(val) >= n
-
-func is_valid_email():
-	return is_valid_length(email, 4)
-
-func is_valid_password():
-	return is_valid_length(password, 4)
-
 func validate():
-	if not is_valid_email():
-		print("TODO: invalid email")
+	if not is_valid_email(email):
+		self.log("TODO: invalid email")
 		return false
 
-	if not is_valid_password():
-		print("TODO: invalid pass")
+	if not is_valid_password(password):
+		self.log("TODO: invalid pass")
 		return false
 
 	if not is_valid_length(username, 4):
-		print("TODO: invalid username")
+		self.log("TODO: invalid username")
 		return false
 
 	return true
 
 func submit():
-	print("submitting registration: ", email, " ", password)
+	self.log("submitting registration: " + email + " " + password)
 	var reg_request = get_node("RegistrationContainer/RegistrationRequest")
 	reg_request.register(email, password, username, self, "handle_response")
 	reg_request.send()
 
-func handle_response(response):
-	print("response: ", response)
+func handle_error(err):
+	self.log("TODO: handle registration err: " + err)
 
-func validate_and_submit():
-	if validate():
-		submit()
+func handle_success(response):
+	self.persistent_log_in_user()

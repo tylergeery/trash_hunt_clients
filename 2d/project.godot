@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Control",
+"class": "BaseScreen",
+"language": "GDScript",
+"path": "res://scripts/components/BaseScreen.gd"
+}, {
+"base": "BaseScreen",
+"class": "FormScreen",
+"language": "GDScript",
+"path": "res://scripts/components/FormScreen.gd"
+}, {
 "base": "HTTPRequest",
 "class": "THBase",
 "language": "GDScript",
@@ -25,6 +35,8 @@ _global_script_classes=[ {
 "path": "res://scripts/http/THRegistration.gd"
 } ]
 _global_script_class_icons={
+"BaseScreen": "",
+"FormScreen": "",
 "THBase": "",
 "THLogin": "",
 "THRegistration": ""

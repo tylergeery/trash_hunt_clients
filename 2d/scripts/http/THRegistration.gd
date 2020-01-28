@@ -13,10 +13,10 @@ func register(_email, _pw, _username, obj, method_name):
 	username = _username
 
 func getEndpoint():
-	return "/register/"
+	return "/v1/player/"
 
 func getRequestBody():
-	print("JSON body: ", JSON.print({"email": email, "pw": pw}))
+	print("JSON body: ", JSON.print({"email": email, "pw": pw, "username": username}))
 	return JSON.print({"email": email, "pw": pw, "username": username})
 
 func getRequestType():
