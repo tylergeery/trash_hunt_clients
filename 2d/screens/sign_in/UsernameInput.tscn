@@ -5,5 +5,15 @@
 [node name="VBoxContainer" instance=ExtResource( 1 )]
 
 [node name="Label" parent="." index="0"]
+margin_right = 180.0
 text = "Username:"
+
+[node name="VBoxContainer" parent="." index="1"]
+margin_right = 180.0
+
+[node name="LineEdit" parent="." index="2"]
+margin_right = 180.0
+
+[node name="VBoxContainer2" parent="." index="3"]
+margin_right = 180.0
 

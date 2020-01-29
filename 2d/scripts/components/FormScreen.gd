@@ -20,13 +20,12 @@ func validate():
 func submit():
 	pass
 
-func persistent_log_in_user():
-	var config = ConfigFile.new()
-	var err = config.load("user://settings.cfg")
-	if err == OK:
-		config.set_value('user', 'logged_in', 1)
+func persistent_logged_in_user(user):
+	self.set_user_value('logged_in', 1)
+	self.set_user_value('id', user['id'])
+	self.set_user_value('username', user['username'])
 
-	get_tree().change_scene("res://game/GameSettings.tcsn")
+	get_tree().change_scene("res://screens/game/GameSettings.tscn")
 
 func validate_and_submit():
 	if validate():

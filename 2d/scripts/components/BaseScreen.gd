@@ -2,8 +2,29 @@ extends Control
 
 class_name BaseScreen
 
-func getIdentifier():
+var config = null
+var err = null
+
+func get_identifier():
 	return "BaseScreen"
 
 func log(msg):
-	return self.getIdentifier() + ": " + msg
+	return self.get_identifier() + ": " + msg
+
+func get_user_config() -> ConfigFile:
+	if err == OK:
+		return config
+
+	config = ConfigFile.new()
+	err = config.load("user://user.cfg")
+
+	if err != OK:
+		self.log("Error: could not open user config")
+
+	return config
+
+func get_user_value(key: String):
+	return self.get_user_config().get_value('user', key)
+
+func set_user_value(key: String, value):
+	self.get_user_config().set_value('user', key, value)

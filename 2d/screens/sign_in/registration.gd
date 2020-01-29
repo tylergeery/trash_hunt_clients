@@ -16,6 +16,9 @@ func _unhandled_input(event):
 		password = get_node("RegistrationContainer/PasswordInput/LineEdit").get_text()
 		username = get_node("RegistrationContainer/UsernameInput/LineEdit").get_text()
 
+func get_identifier():
+	return "RegistrationScreen"
+
 func validate():
 	if not is_valid_email(email):
 		self.log("TODO: invalid email")
@@ -41,4 +44,5 @@ func handle_error(err):
 	self.log("TODO: handle registration err: " + err)
 
 func handle_success(response):
-	self.persistent_log_in_user()
+	self.set_user_value('token', response['token'])
+	self.persistent_logged_in_user(response['player'])

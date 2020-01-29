@@ -14,7 +14,7 @@ func _unhandled_input(event):
 		email = get_node("LoginContainer/EmailInput/LineEdit").get_text()
 		password = get_node("LoginContainer/PasswordInput/LineEdit").get_text()
 
-func getIdentifier():
+func get_identifier():
 	return "LoginScreen"
 
 func validate():
@@ -39,4 +39,4 @@ func handle_error(err):
 
 func handle_success(response):
 	self.log("login response " + str(response))
-	self.persistent_log_in_user()
+	self.persistent_logged_in_user(response)
