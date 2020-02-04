@@ -41,7 +41,7 @@ func submit():
 	reg_request.send()
 
 func handle_error(err):
-	self.log("TODO: handle registration err: " + err)
+	self.log("TODO: handle registration err: " + str(err))
 
 func handle_success(response):
 	self.set_user_value('token', response['token'])

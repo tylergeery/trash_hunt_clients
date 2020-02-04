@@ -12,6 +12,9 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="SplashImage" parent="." instance=ExtResource( 2 )]
 
@@ -37,4 +40,3 @@ margin_bottom = 349.0
 
 [node name="LoginRequest" type="HTTPRequest" parent="LoginContainer"]
 script = ExtResource( 7 )
-

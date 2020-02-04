@@ -10,4 +10,3 @@ script = ExtResource( 1 )
 
 [node name="SplashImage" parent="." instance=ExtResource( 2 )]
 stretch_mode = 7
-

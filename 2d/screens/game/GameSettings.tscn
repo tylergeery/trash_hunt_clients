@@ -1,4 +1,161 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
 
-[node name="GameSettingsScreen" type="Node2D"]
+[ext_resource path="res://ui/themes/title_theme.tres" type="Theme" id=1]
 
+[node name="GameSettingsScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.752941, 1, 0.623529, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = 50.0
+margin_right = -50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/MarginContainer"]
+margin_right = 380.0
+margin_bottom = 750.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SettingsTitle" type="VBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+margin_right = 380.0
+margin_bottom = 57.0
+
+[node name="LinkButton" type="LinkButton" parent="ColorRect/MarginContainer/VBoxContainer/SettingsTitle"]
+margin_left = 58.0
+margin_right = 322.0
+margin_bottom = 57.0
+size_flags_horizontal = 4
+theme = ExtResource( 1 )
+custom_colors/font_color = Color( 0.235294, 0.235294, 0.235294, 1 )
+shortcut_in_tooltip = false
+button_mask = 0
+text = "Game Selection"
+underline = 2
+
+[node name="Opponent" type="VBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+margin_top = 61.0
+margin_right = 380.0
+margin_bottom = 81.0
+
+[node name="OptionButton" type="OptionButton" parent="ColorRect/MarginContainer/VBoxContainer/Opponent"]
+margin_right = 380.0
+margin_bottom = 20.0
+text = "Computer"
+items = [ "Computer", null, false, 0, null, "Random", null, false, 1, null, "Friend", null, false, 2, null ]
+selected = 0
+
+[node name="ComputerOptions" type="VBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+margin_top = 85.0
+margin_right = 380.0
+margin_bottom = 113.0
+
+[node name="HSeparator" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer/ComputerOptions"]
+margin_right = 380.0
+margin_bottom = 4.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer/ComputerOptions"]
+margin_top = 8.0
+margin_right = 380.0
+margin_bottom = 28.0
+
+[node name="Button" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/ComputerOptions/HBoxContainer"]
+margin_right = 124.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+toggle_mode = true
+pressed = true
+text = "Easy"
+
+[node name="Button2" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/ComputerOptions/HBoxContainer"]
+margin_left = 128.0
+margin_right = 252.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Medium"
+
+[node name="Button3" type="Button" parent="ColorRect/MarginContainer/VBoxContainer/ComputerOptions/HBoxContainer"]
+margin_left = 256.0
+margin_right = 380.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Hard"
+
+[node name="FriendOptions" type="VBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+visible = false
+margin_top = 147.0
+margin_right = 380.0
+margin_bottom = 205.0
+
+[node name="HSeparator" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer/FriendOptions"]
+margin_right = 380.0
+margin_bottom = 4.0
+
+[node name="LinkButton" type="LinkButton" parent="ColorRect/MarginContainer/VBoxContainer/FriendOptions"]
+margin_left = 304.0
+margin_top = 8.0
+margin_right = 380.0
+margin_bottom = 22.0
+size_flags_horizontal = 8
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Add Friends"
+
+[node name="HSeparator2" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer/FriendOptions"]
+margin_top = 26.0
+margin_right = 380.0
+margin_bottom = 30.0
+
+[node name="LineEdit" type="LineEdit" parent="ColorRect/MarginContainer/VBoxContainer/FriendOptions"]
+margin_top = 34.0
+margin_right = 380.0
+margin_bottom = 58.0
+text = "Search Friends"
+
+[node name="RandomOptions" type="VBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+visible = false
+margin_top = 147.0
+margin_right = 380.0
+margin_bottom = 205.0
+
+[node name="HSeparator" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer/RandomOptions"]
+margin_right = 380.0
+margin_bottom = 4.0
+
+[node name="LinkButton" type="LinkButton" parent="ColorRect/MarginContainer/VBoxContainer/RandomOptions"]
+margin_left = 304.0
+margin_top = 8.0
+margin_right = 380.0
+margin_bottom = 22.0
+size_flags_horizontal = 8
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Add Friends"
+
+[node name="HSeparator2" type="HSeparator" parent="ColorRect/MarginContainer/VBoxContainer/RandomOptions"]
+margin_top = 26.0
+margin_right = 380.0
+margin_bottom = 30.0
+
+[node name="LineEdit" type="LineEdit" parent="ColorRect/MarginContainer/VBoxContainer/RandomOptions"]
+margin_top = 34.0
+margin_right = 380.0
+margin_bottom = 58.0
+text = "Search Friends"
