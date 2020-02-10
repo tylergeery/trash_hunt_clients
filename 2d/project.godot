@@ -49,6 +49,10 @@ run/main_scene="res://screens/sign_in/SplashPage.tscn"
 boot_splash/bg_color=Color( 0.521569, 1, 0.529412, 1 )
 config/icon="res://icon.png"
 
+[autoload]
+
+GameStart="*res://screens/game/play/GameStart.gd"
+
 [display]
 
 window/size/width=480
