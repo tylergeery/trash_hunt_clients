@@ -1,20 +1,17 @@
-extends Node
+extends Node2D
 
 
 # Declare member variables here. Examples:
-var _ws = null
+var _conn = null
 
 
 func new():
-	_ws = WebSocketClient.new()
-	_ws.connect("connection_established", self, "_connection_established")
-	_ws.connect("connection_closed", self, "_connection_closed")
-	_ws.connect("connection_error", self, "_connection_error")
-	_ws.connect("data_received", self, "_data_received")
+	_conn = StreamPeerTCP.new()
 
-	var url = "ws://localhost:8080"
-	print("Connecting to " + url)
-	_ws.connect_to_url(url)
+	print("Connecting to localhost:3001")
+	var err = _conn.connect_to_host("localhost", 3001)
+	if err:
+		print("Error connecting to localhost:3001, ", err)
 
 
 func _connection_established(protocol):
@@ -33,8 +30,11 @@ func _data_received():
 	print("Connection error")
 
 
-func send():
-	pass
+func send(data):
+	if not data is String:
+		data = JSON.print(data)
+
+	_conn.put_string(data)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

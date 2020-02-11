@@ -78,7 +78,7 @@ class RegistrationScreen extends FormScreen {
      * @param {string} pw
      * @return {Promise}
      */
-    createUser(email, name, pw) {
+    createUser(email, username, pw) {
         return new Promise((resolve, reject) => {
             fetch(
                 'http://localhost:3000/v1/player/',
@@ -95,7 +95,7 @@ class RegistrationScreen extends FormScreen {
                     body: JSON.stringify({
                         email,
                         pw,
-                        name,
+                        username,
                     }),
                 }
             ).then((result) => {

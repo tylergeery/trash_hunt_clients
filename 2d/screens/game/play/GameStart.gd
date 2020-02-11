@@ -10,6 +10,8 @@ func start(settings):
 	_settings = settings
 	get_tree().change_scene(GAMEPLAY_SCENE)
 
+func get_settings():
+	return _settings
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
