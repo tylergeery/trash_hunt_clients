@@ -17,13 +17,14 @@ var GAME_TILE_ALL_WALLS = preload("res://screens/game/play/maze/MazeSpot4Walls.t
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	self.create_socket_connection()
+	self.initialize_game_connection()
 
 
 func get_identifier():
-	return "BaseNode"
+	return "GamePlay"
 
-func create_socket_connection():
+
+func initialize_game_connection():
 	var settings = GameStart.get_settings()
 	var game_request = {
 		"user_token": self.get_user_value("token"),
@@ -33,26 +34,59 @@ func create_socket_connection():
 
 	self.log("Starting game with settings:" + str(game_request))
 	_connection = GameConnection.instance()
-	_connection.new()
+	_connection.new(game_request)
+
+	_connection.connect("game_connect", self, "on_game_connect")
+	_connection.connect("game_pending", self, "on_game_pending")
+	_connection.connect("game_start", self, "on_game_start")
+	_connection.connect("game_state_update", self, "on_game_state_update")
+	_connection.connect("game_complete", self, "on_game_complete")
+	_connection.connect("game_error", self, "on_game_error")
+
+
+func on_game_connect():
+	pass
+
+func on_game_pending():
+	pass
+
+func on_game_start():
+	# Calculate seconds to start
+	pass
+
+func on_game_state_update(state):
+	pass
+
+func on_game_complete():
+	pass
+
+func on_game_error(error):
+	pass
 
 
 func countdown():
+	# TODO: handle countdown through _process
 	pass
-
 
 func create_maze():
 	pass
 
 
 func _unhandled_input(event):
+	# collect move
 	if event is InputEventAction:
 		print("event:", event)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if not game_start:
+		self.countdown()
+		return
+
 	time_since_move += delta
 	if time_since_move >= 1000:
 		# send move
-		pass
+		_connection.send({})
+		time_since_move = 0
 
