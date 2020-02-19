@@ -35,8 +35,8 @@ func submit():
 	login_request.send()
 
 func handle_error(err):
-	self.log("TODO: handle login err: " + err)
+	self.log("TODO: handle login err: " + str(err))
 
 func handle_success(response):
 	self.log("login response " + str(response))
-	self.persistent_logged_in_user(response)
+	self.persistent_logged_in_user(response["player"])

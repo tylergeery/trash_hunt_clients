@@ -18,6 +18,7 @@ var GAME_TILE_ALL_WALLS = preload("res://screens/game/play/maze/MazeSpot4Walls.t
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	self.initialize_game_connection()
+	self.set_process(true)
 
 
 func get_identifier():
@@ -32,9 +33,11 @@ func initialize_game_connection():
 		"difficulty": settings["difficulty"]
 	}
 
+	print("Game Request: ", game_request)
 	self.log("Starting game with settings:" + str(game_request))
 	_connection = GameConnection.instance()
 	_connection.new(game_request)
+	self.add_child(_connection)
 
 	_connection.connect("game_connect", self, "on_game_connect")
 	_connection.connect("game_pending", self, "on_game_pending")
@@ -45,23 +48,22 @@ func initialize_game_connection():
 
 
 func on_game_connect():
-	pass
+	print("Game connected")
 
 func on_game_pending():
-	pass
+	print("Game pending")
 
 func on_game_start():
-	# Calculate seconds to start
-	pass
+	print("Game starting")
 
 func on_game_state_update(state):
-	pass
+	print("Game state update", state)
 
 func on_game_complete():
-	pass
+	print("Game complete")
 
 func on_game_error(error):
-	pass
+	print("Game error", error)
 
 
 func countdown():
@@ -80,6 +82,7 @@ func _unhandled_input(event):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	self.log("Processing from game connection")
 	if not game_start:
 		self.countdown()
 		return

@@ -1,5 +1,8 @@
 extends FormScreen
 
+const LOGIN_LINK = "RegistrationContainer/HBoxContainer/LoginLink"
+const REGISTER_SUBMIT_BUTTON = "RegistrationContainer/RegistrationButtonHolder/Button"
+
 # Declare member variables here. Examples:
 var email = ""
 var password = ""
@@ -7,7 +10,8 @@ var username = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	get_node("RegistrationContainer/RegistrationButtonHolder/Button").connect("button_up", self, "validate_and_submit")
+	get_node(REGISTER_SUBMIT_BUTTON).connect("button_up", self, "validate_and_submit")
+	get_node(LOGIN_LINK).connect("button_up", self, "to_login_page")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _unhandled_input(event):
@@ -15,6 +19,9 @@ func _unhandled_input(event):
 		email = get_node("RegistrationContainer/EmailInput/LineEdit").get_text()
 		password = get_node("RegistrationContainer/PasswordInput/LineEdit").get_text()
 		username = get_node("RegistrationContainer/UsernameInput/LineEdit").get_text()
+
+func to_login_page():
+	get_tree().change_scene("res://screens/login/LoginScreen.tscn")
 
 func get_identifier():
 	return "RegistrationScreen"

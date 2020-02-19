@@ -35,9 +35,12 @@ func new(game_settings):
 		self.emit_signal("game_error", "Could not connect to game server")
 
 func _check_connection():
+	breakpoint
 	if _conn.get_status() == _conn.STATUS_CONNECTED:
 		_game_state = GameState.INIT
+		print("Sending game settings", _game_settings)
 		self.send(_game_settings)
+		print("Sending game connected signal")
 		self.emit_signal("game_connected")
 
 
@@ -51,7 +54,7 @@ func _process_input():
 	var msg = JSON.parse(input)
 	if _game_state == GameState.INIT:
 		if msg.data != "Status: Pending":
-			self.emit_signal("game_error", "Uknown game error: " + str(msg))
+			self.emit_signal("game_error", "Unknown game error: " + str(msg))
 			return
 		self.emit_signal("game_pending")
 	elif _game_state == GameState.PENDING:
@@ -59,6 +62,9 @@ func _process_input():
 		self.emit_signal("game_start")
 	elif _game_state == GameState.ACTIVE:
 		# Validate msg, check for winner
+		if false:
+			self.emit_signal("game_complete")
+
 		self.emit_signal("game_state_update")
 
 
@@ -70,10 +76,13 @@ func send(data):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if not _game_state or _game_state == GameState.COMPLETE:
+	if _game_state == GameState.COMPLETE:
 		return
 
 	if _game_state == GameState.UNSTARTED:
 		self._check_connection()
 
-	self._process_input()
+	_game_interval += delta
+	if _game_interval > 1:
+		self._process_input()
+		_game_interval = 0

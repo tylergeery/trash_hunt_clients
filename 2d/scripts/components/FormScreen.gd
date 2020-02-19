@@ -38,7 +38,7 @@ func handle_error(err):
 	self.log("error response: " + err)
 
 func handle_response(response_code, response):
-	if response_code != 201:
+	if response_code >= 400:
 		return self.handle_error(response)
 
 	return self.handle_success(response)

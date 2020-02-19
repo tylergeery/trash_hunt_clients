@@ -40,7 +40,10 @@ func show_mode_options():
 
 
 func start_game_pressed():
-	GameStart.start({"mode": mode})
+	GameStart.start({
+		"opponent": -1,
+		"difficulty": 1
+	})
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
